@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -14,6 +15,7 @@ import androidx.media3.common.util.Util
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import com.example.mediaplayer.R
 import com.example.mediaplayer.databinding.FragmentHomeBinding
 
 
@@ -45,6 +47,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun initializePlayer() {
+        val btnMute = view?.findViewById<AppCompatImageView>(R.id.volume_control)
+        val btnPlay = view?.findViewById<AppCompatImageView>(R.id.btn_exo_play)
+        val btnNext = view?.findViewById<AppCompatImageView>(R.id.btn_exo_next)
+        val btnPrevious = view?.findViewById<AppCompatImageView>(R.id.btn_exo_previous)
+        val btnForward = view?.findViewById<AppCompatImageView>(R.id.btn_exo_fast_forward)
+        val btnRewind = view?.findViewById<AppCompatImageView>(R.id.btn_exo_fast_rewind)
+        var volumeInfo = true
+        var play = true
+        var currentPosition = 0L
 
 //        val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
 //
@@ -80,7 +91,46 @@ class HomeFragment : Fragment() {
                     exoPlayer.seekTo(currentItem, playbackPosition)
                     exoPlayer.prepare()
                     exoPlayer.play()
-                  //  binding.videoView.
+
+
+                    btnMute?.setOnClickListener {
+                        volumeInfo = if (volumeInfo) {
+                            btnMute.setImageResource(R.drawable.ic_volume_up)
+                            exoPlayer.volume = 1F
+                            !volumeInfo
+                        } else {
+                            btnMute.setImageResource(R.drawable.ic_volume_off)
+                            exoPlayer.volume = 0F
+                            !volumeInfo
+                        }
+                    }
+                    btnPlay?.setOnClickListener {
+                        play = if (play) {
+                            btnPlay.setImageResource(R.drawable.ic_play_circle)
+                            exoPlayer.pause()
+                            currentPosition = exoPlayer.currentPosition
+                            !play
+                        } else {
+                            btnPlay.setImageResource(R.drawable.ic_pause_circle)
+                            exoPlayer.play()
+                            exoPlayer.seekTo(currentPosition)
+                            !play
+                        }
+                    }
+                    btnNext?.setOnClickListener {
+                            exoPlayer.seekToNextMediaItem()
+                    }
+                    btnPrevious?.setOnClickListener {
+                            exoPlayer.seekToPreviousMediaItem()
+                    }
+                    btnForward?.setOnClickListener {
+                       val position =  exoPlayer.currentPosition
+                        exoPlayer.seekTo(position+10000)
+                    }
+                    btnRewind?.setOnClickListener {
+                        val position =  exoPlayer.currentPosition
+                        exoPlayer.seekTo(position-10000)
+                    }
 
 
 

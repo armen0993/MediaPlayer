@@ -10,8 +10,11 @@
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:controller_layout_id="@layout/controller_exo_player">
-
-    </androidx.media3.ui.PlayerView>
+        app:hide_on_touch="true"
+        app:resize_mode="fit"
+        app:show_timeout="1000"
+        app:use_controller="true"
+        android:background="#ffffff"
+        app:controller_layout_id="@layout/controller_exo_player"/>
 
 </FrameLayout>
