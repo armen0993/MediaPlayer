@@ -8,8 +8,8 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/size_0"
+        android:layout_height="@dimen/size_0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +21,9 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_bar"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/size_56"
         android:background="@drawable/bg_bottom_bar"
-        app:itemIconSize="25dp"
+        app:itemIconSize="@dimen/size_25"
         app:labelVisibilityMode="labeled"
         app:itemBackground="@color/white"
         app:menu="@menu/bottom_menu"
